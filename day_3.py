@@ -5,7 +5,7 @@ testinput = ["vJrwpWtwJgWrhcsFMMfFFhFp",
 "ttgJtRGJQctTZtZT",
 "CrZsJsPPZsGzwwsLwLmpwMDw"]
 
-with open("inputs/input_day3_0.txt",'r' ) as f:
+with open("inputs/input_day3_0.txt", 'r') as f:
     lines = f.readlines()
 
 lines = [x.strip() for x in lines]
@@ -40,7 +40,6 @@ def find_duplicate_letter(letter,list_1, list_2):
 #new_lines = testinput
 total_value_group = 0
 for i in range(0, len(lines), 3):
-
     for letter in lines[i]:
         if find_duplicate_letter(letter, lines[i+1], lines[i+2]):
             letter_value = convert_letter_to_number(letter)
