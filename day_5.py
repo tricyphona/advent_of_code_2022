@@ -40,4 +40,4 @@ for operation in crate_operations:
     crates_list[crate_stack_destination].extend(crates_to_move)
 print(crates_list)
 for crate_stack in crates_list:
-    print(crate_stack[-1])
+    print(crate_stack[-1], end='')
