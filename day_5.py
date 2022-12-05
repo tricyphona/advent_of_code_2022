@@ -7,12 +7,10 @@ stacked_crates = lines[0:8]
 # "[Z] [M] [P]"]
 
 stacked_crates_clean = []
-
-# 7 of 2 --> height of initial stack items.
-for i in range(7, -1, -1):
+height_stacked_crates = len(stacked_crates)
+for i in range(height_stacked_crates-1, -1, -1):
     stacked_crates_clean.append(stacked_crates[i][1::4])
 stripped_crates_list = [[] for i in range(9)]
-
 for line_of_crates in stacked_crates_clean:
     for i, item_in_row in enumerate(line_of_crates):
         if item_in_row != ' ':
