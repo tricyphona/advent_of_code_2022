@@ -16,8 +16,8 @@ for line_of_crates in input_crates_as_str_with_whitespace:
     for i, item_in_row in enumerate(line_of_crates):
         if item_in_row != ' ':
             crates_as_list_per_row[i].append(item_in_row)
-crates_list = crates_as_list_per_row
-print(crates_list)
+crate_stacks = crates_as_list_per_row
+print(crate_stacks)
 
 
 def get_objects_to_move(crate_row, amount):
@@ -36,9 +36,9 @@ for operation in crate_operations:
     amount_crates_moved, crate_stack_from, crate_stack_destination = map(int, operation.split()[1::2])
     crate_stack_from -= 1  # index in problem start at 1, conversion to python's index.
     crate_stack_destination -= 1  # index in problem start at 1, conversion to python's index.
-    crates_to_move = get_objects_to_move(crates_list[crate_stack_from], amount_crates_moved)
-    crates_list[crate_stack_from] = crates_list[crate_stack_from][:-amount_crates_moved]
-    crates_list[crate_stack_destination].extend(crates_to_move)
-print(crates_list)
-for crate_stack in crates_list:
+    crates_to_move = get_objects_to_move(crate_stacks[crate_stack_from], amount_crates_moved)
+    crate_stacks[crate_stack_from] = crate_stacks[crate_stack_from][:-amount_crates_moved]
+    crate_stacks[crate_stack_destination].extend(crates_to_move)
+print(crate_stacks)
+for crate_stack in crate_stacks:
     print(crate_stack[-1], end='')
