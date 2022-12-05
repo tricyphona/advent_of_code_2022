@@ -27,6 +27,7 @@ def get_objects_to_move(crate_row, amount):
     #crates.reverse()
     return crates
 
+
 crate_operations = lines[10:]
 # crate_operations = ["move 1 from 2 to 1",
 #                     "move 3 from 1 to 3",
