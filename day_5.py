@@ -6,16 +6,17 @@ stacked_crates = lines[0:8]
 # "[N] [C]",
 # "[Z] [M] [P]"]
 
-stacked_crates_clean = []
+input_crates_as_str_with_whitespace = []
 height_stacked_crates = len(stacked_crates)
 for i in range(height_stacked_crates-1, -1, -1):
-    stacked_crates_clean.append(stacked_crates[i][1::4])
-stripped_crates_list = [[] for i in range(9)]
-for line_of_crates in stacked_crates_clean:
+    input_crates_as_str_with_whitespace.append(stacked_crates[i][1::4])
+
+crates_as_list_per_row = [[] for i in range(9)]
+for line_of_crates in input_crates_as_str_with_whitespace:
     for i, item_in_row in enumerate(line_of_crates):
         if item_in_row != ' ':
-            stripped_crates_list[i].append(item_in_row)
-crates_list = stripped_crates_list
+            crates_as_list_per_row[i].append(item_in_row)
+crates_list = crates_as_list_per_row
 print(crates_list)
 
 
