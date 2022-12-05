@@ -4,12 +4,12 @@ with open("inputs/input_day4_0.txt", 'r') as f:
 lines = [x.strip() for x in lines]
 
 test = ["2-4,6-8",
-"2-3,4-5",
-"5-7,7-9",
-"2-8,3-7",
-"6-6,4-6",
-"2-6,4-8"]
-#lines = test
+        "2-3,4-5",
+        "5-7,7-9",
+        "2-8,3-7",
+        "6-6,4-6",
+        "2-6,4-8"]
+# lines = test
 
 
 class Elf:
@@ -43,7 +43,7 @@ class Elf:
 
 
 all_elves = []
-compare_temp_list = [None,None]
+compare_temp_list = [None, None]
 fully_contained = 0
 for line in lines:
     elves_to_compare = line.split(',')
@@ -51,7 +51,7 @@ for line in lines:
         compare_temp_list[i] = Elf(elf_to_compare.split('-'))
     if compare_temp_list[0] == compare_temp_list[1]:
         fully_contained += 1
-    elif Elf.is_fully_contained(compare_temp_list[0],compare_temp_list[1]):
+    elif Elf.is_fully_contained(compare_temp_list[0], compare_temp_list[1]):
         fully_contained += 1
     elif Elf.is_fully_contained(compare_temp_list[1], compare_temp_list[0]):
         fully_contained += 1
@@ -63,9 +63,9 @@ for line in lines:
     elves_to_compare = line.split(',')
     for i, elf_to_compare in enumerate(elves_to_compare):
         compare_temp_list[i] = Elf(elf_to_compare.split('-'))
-    if Elf.overlap(compare_temp_list[0],compare_temp_list[1]):
+    if Elf.overlap(compare_temp_list[0], compare_temp_list[1]):
         count_overlap += 1
-    elif Elf.overlap(compare_temp_list[1],compare_temp_list[0]):
+    elif Elf.overlap(compare_temp_list[1], compare_temp_list[0]):
         count_overlap += 1
 
 print(count_overlap)
