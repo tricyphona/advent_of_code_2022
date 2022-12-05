@@ -34,12 +34,12 @@ crate_operations = lines[10:]
 #                     "move 2 from 2 to 1",
 #                     "move 1 from 1 to 2"]
 for operation in crate_operations:
-    move_operation, from_operation, to_operation = map(int, operation.split()[1::2])
-    from_operation -= 1  # index in problem start at 1, conversion to python's index.
-    to_operation -= 1  # index in problem start at 1, conversion to python's index.
-    objects_to_move = get_objects_to_move(crates_list[from_operation], move_operation)
-    crates_list[from_operation] = crates_list[from_operation][:-move_operation]
-    crates_list[to_operation].extend(objects_to_move)
+    amount_crates_moved, crate_stack_from, crate_stack_destination = map(int, operation.split()[1::2])
+    crate_stack_from -= 1  # index in problem start at 1, conversion to python's index.
+    crate_stack_destination -= 1  # index in problem start at 1, conversion to python's index.
+    crates_to_move = get_objects_to_move(crates_list[crate_stack_from], amount_crates_moved)
+    crates_list[crate_stack_from] = crates_list[crate_stack_from][:-amount_crates_moved]
+    crates_list[crate_stack_destination].extend(crates_to_move)
 print(crates_list)
 for crate_stack in crates_list:
     print(crate_stack[-1])
