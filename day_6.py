@@ -16,12 +16,13 @@ with open("inputs/input_day6_0.txt", 'r') as f:
 
 length_of_marker = 14  # from puzzle input --> 4 or 14.
 length_of_starting_sequence = length_of_marker - 1
-start_sequence = list(lines[0:length_of_starting_sequence])
+buffer = list(lines[0:length_of_starting_sequence])
 
 for i, new_character in enumerate(lines[length_of_starting_sequence:]):
-    start_sequence.append(new_character)
-    if len(start_sequence) == len(set(start_sequence)):
-        print(i+length_of_marker, new_character)
+    buffer.append(new_character)
+    if len(buffer) == len(set(buffer)):
+        index_all_unique_chars = i + length_of_marker
+        print(index_all_unique_chars, new_character)
         break
     else:
-        start_sequence = start_sequence[1:]
+        buffer = buffer[1:]
