@@ -15,9 +15,10 @@ lines = lines[0]
 
 print(lines)
 length_of_marker = 14
-start_sequence = list(lines[0:length_of_marker-1])
+length_of_starting_sequence = length_of_marker - 1
+start_sequence = list(lines[0:length_of_starting_sequence])
 
-for i, new_character in enumerate(lines[length_of_marker-1:]):
+for i, new_character in enumerate(lines[length_of_starting_sequence:]):
     start_sequence.append(new_character)
     if len(start_sequence) == len(set(start_sequence)):
         print(i+length_of_marker, new_character)
