@@ -24,4 +24,3 @@ for i, new_character in enumerate(lines[length_of_marker-1:]):
         break
     else:
         start_sequence = start_sequence[1:]
-
