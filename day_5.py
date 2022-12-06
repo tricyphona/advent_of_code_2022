@@ -32,6 +32,7 @@ crate_operations = lines[10:]
 #                     "move 3 from 1 to 3",
 #                     "move 2 from 2 to 1",
 #                     "move 1 from 1 to 2"]
+
 for operation in crate_operations:
     amount_crates_moved, crate_stack_from, crate_stack_destination = map(int, operation.split()[1::2])
     crate_stack_from -= 1  # index in problem start at 1, conversion to python's index.
