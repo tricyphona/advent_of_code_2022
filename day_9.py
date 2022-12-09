@@ -1,11 +1,11 @@
 with open("inputs/input_day9_0.txt", 'r') as f:
     lines = f.readlines()
-lines_breakless = []
+lines_no_breaks = []
 for line in lines:
     line_without_linebreak = line.strip()
-    lines_breakless.append(line_without_linebreak)
+    lines_no_breaks.append(line_without_linebreak)
 
-test_case = [
+test_case1 = [
     "R 4",
     "U 4",
     "L 3",
@@ -16,7 +16,7 @@ test_case = [
     "R 2"
      ]
 
-test_case = [
+test_case2 = [
     "R 5",
     "U 8",
     "L 8",
@@ -26,7 +26,8 @@ test_case = [
     "L 25",
     "U 20"
     ]
-# lines_breakless = test_case
+# lines_no_breaks = test_case1
+# lines_no_breaks = test_case2
 
 
 class Rope:
@@ -44,36 +45,30 @@ class Rope:
         self.y += move_y
         self.visited.add(self.get_location())
 
-    def check_distance(self, other):
-        move_x = 0
-        move_y = 0
-        if self.x + 1 < other.x or self.x - 1 > other.x or self.y + 1 < other.y or self.y - 1 > other.y:
-            move_x, move_y = self.get_difference(other)
-            print(move_x, move_y)
-            self.catch_up(move_x, move_y)
+    def check_distance_too_big(self, other):
+        return self.x + 1 < other.x or self.x - 1 > other.x or self.y + 1 < other.y or self.y - 1 > other.y
 
-    def get_difference(self, other):
+    def get_movement(self, other):
         if self.x < other.x:
-            move_x = 1
+            distance_to_move_in_x = 1
         elif self.x > other.x:
-            move_x = -1
+            distance_to_move_in_x = -1
         else:
-            move_x = 0
+            distance_to_move_in_x = 0
         if self.y < other.y:
-            move_y = 1
+            distance_to_move_in_y = 1
         elif self.y > other.y:
-            move_y = -1
+            distance_to_move_in_y = -1
         else:
-            move_y = 0
-        return move_x, move_y
+            distance_to_move_in_y = 0
+        return distance_to_move_in_x, distance_to_move_in_y
 
 
-print(lines_breakless)
-bezochte_locaties = set()
+print(lines_no_breaks)
 length_rope = 10  # of 2
 head = Rope()
 tails = [Rope() for i in range(length_rope-1)]  # head telt als eerste rope
-for instruction in lines_breakless:
+for instruction in lines_no_breaks:
     direction, distance = instruction.split()
     for i in range(int(distance)):
         if direction == 'R':
@@ -86,9 +81,14 @@ for instruction in lines_breakless:
             head.y -= 1
         for j in range(len(tails)):
             if j == 0:
-                tails[j].check_distance(head)
+                if tails[j].check_distance_too_big(head):
+                    move_x, move_y = tails[j].get_movement(head)
+                    tails[j].catch_up(move_x, move_y)
+                
             else:
-                tails[j].check_distance(tails[j-1])
+                if tails[j].check_distance_too_big(tails[j - 1]):
+                    move_x, move_y = tails[j].get_movement(tails[j - 1])
+                    tails[j].catch_up(move_x, move_y)
 
 print(tails[length_rope - 2].visited)
 print(len(tails[length_rope - 2].visited))
