@@ -55,19 +55,21 @@ class Rope:
             move_x = -1
         else:
             move_x = 0
+
         if self.y < other.y:
             move_y = 1
         elif self.y > other.y:
             move_y = -1
         else:
             move_y = 0
+
         return move_x, move_y
 
 
+rope_length = 10  # of 2
 print(lines_no_breaks)
-length_rope = 10  # of 2
 head = Rope()
-tails = [Rope() for i in range(length_rope-1)]  # head telt als eerste rope
+tails = [Rope() for i in range(rope_length - 1)]  # head telt als eerste rope
 for instruction in lines_no_breaks:
     direction, distance = instruction.split()
     for i in range(int(distance)):
@@ -84,11 +86,10 @@ for instruction in lines_no_breaks:
                 if tails[j].check_distance_too_big(head):
                     move_x, move_y = tails[j].get_movement(head)
                     tails[j].catch_up(move_x, move_y)
-                
             else:
                 if tails[j].check_distance_too_big(tails[j - 1]):
                     move_x, move_y = tails[j].get_movement(tails[j - 1])
                     tails[j].catch_up(move_x, move_y)
 
-print(tails[length_rope - 2].visited)
-print(len(tails[length_rope - 2].visited))
+print(tails[rope_length - 2].visited)
+print(len(tails[rope_length - 2].visited))
