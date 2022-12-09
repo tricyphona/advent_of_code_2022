@@ -50,18 +50,18 @@ class Rope:
 
     def get_movement(self, other):
         if self.x < other.x:
-            distance_to_move_in_x = 1
+            move_x = 1
         elif self.x > other.x:
-            distance_to_move_in_x = -1
+            move_x = -1
         else:
-            distance_to_move_in_x = 0
+            move_x = 0
         if self.y < other.y:
-            distance_to_move_in_y = 1
+            move_y = 1
         elif self.y > other.y:
-            distance_to_move_in_y = -1
+            move_y = -1
         else:
-            distance_to_move_in_y = 0
-        return distance_to_move_in_x, distance_to_move_in_y
+            move_y = 0
+        return move_x, move_y
 
 
 print(lines_no_breaks)
