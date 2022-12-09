@@ -25,8 +25,9 @@ with open("inputs/input_day7_0.txt", 'r') as f:
 # "5626152 d.ext",
 # "7214296 k"]
 
+
 class Directory:
-    def __init__(self, items = None, parent=None, name="/"):
+    def __init__(self, items=None, parent=None, name="/"):
         if items is None:
             self.items = []
         else:
@@ -99,5 +100,3 @@ space_to_clean *= -1
 for dir in directories:
     if dir.size > space_to_clean:
         print(dir)
-
-

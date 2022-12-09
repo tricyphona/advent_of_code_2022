@@ -1,4 +1,4 @@
-with open("inputs/input_day1_0.txt",'r' ) as f:
+with open("inputs/input_day1_0.txt", 'r') as f:
     lines = f.readlines()
 
 new_lines = [x.replace('\n', '') for x in lines]

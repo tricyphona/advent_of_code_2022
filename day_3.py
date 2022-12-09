@@ -1,9 +1,11 @@
-testinput = ["vJrwpWtwJgWrhcsFMMfFFhFp",
-"jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL",
-"PmmdzqPrVvPwwTWBwg",
-"wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn",
-"ttgJtRGJQctTZtZT",
-"CrZsJsPPZsGzwwsLwLmpwMDw"]
+testinput = [
+    "vJrwpWtwJgWrhcsFMMfFFhFp",
+    "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL",
+    "PmmdzqPrVvPwwTWBwg",
+    "wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn",
+    "ttgJtRGJQctTZtZT",
+    "CrZsJsPPZsGzwwsLwLmpwMDw"
+]
 
 with open("inputs/input_day3_0.txt", 'r') as f:
     lines = f.readlines()
@@ -16,11 +18,13 @@ def get_duplicate_letter(first_part, second_part):
         if letter in second_part:
             return letter
 
+
 def convert_letter_to_number(letter):
     if letter.islower():
         return ord(letter)-96
     else:
         return ord(letter)-64+26
+
 
 total_value = 0
 for line in lines:
@@ -34,10 +38,13 @@ for line in lines:
     total_value += letter_value
 print(total_value)
 
-def find_duplicate_letter(letter,list_1, list_2):
+
+def find_duplicate_letter(letter, list_1, list_2):
     if letter in list_1 and letter in list_2:
         return True
-#new_lines = testinput
+
+
+# new_lines = testinput
 total_value_group = 0
 for i in range(0, len(lines), 3):
     for letter in lines[i]:
