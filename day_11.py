@@ -96,7 +96,7 @@ class Monkey:
         return self.inspected_items <= other.inspected_items
 
 
-def get_input(lines, all_monkeys):
+def create_list_of_monkeys(lines, all_monkeys):
     monkey_id, items, operator, operator_value, test_value, to_monkey_true, to_monkey_false = [None for i in range(7)]
     for line in lines:
         if line == '\n':
@@ -137,13 +137,15 @@ def monkey_shenanigans(rounds_of_shenanigans, all_monkeys):
 
 
 def process_all_shenanigans(all_monkeys, rounds_of_shenanigans,
-                            bool_print_items=False, bool_print_inspected_items=False):
+                            bool_print_items=False, bool_print_times_items_inspected=False):
     if bool_print_items:
         print_items(all_monkeys)
+
     monkey_shenanigans(rounds_of_shenanigans, all_monkeys)
+
     if bool_print_items:
         print_items(all_monkeys)
-    if bool_print_inspected_items:
+    if bool_print_times_items_inspected:
         print_number_of_inspected_items(all_monkeys)
     active_monkeys = sorted(all_monkeys, reverse=True)
     print(f"After {rounds_of_shenanigans} rounds of shenanigans the level of monkey business is: "
@@ -169,13 +171,13 @@ print("Part 1:")
 Monkey.part = 1
 rounds_of_shenanigans = 20
 all_monkeys = []
-get_input(lines, all_monkeys)
-process_all_shenanigans(all_monkeys, rounds_of_shenanigans, bool_print_inspected_items=True)
+create_list_of_monkeys(lines, all_monkeys)
+process_all_shenanigans(all_monkeys, rounds_of_shenanigans, bool_print_times_items_inspected=True)
 
 print('\n')
 print("Part 2:")
 Monkey.part = 2
 rounds_of_shenanigans = 10000
 all_monkeys = []
-get_input(lines, all_monkeys)
-process_all_shenanigans(all_monkeys, rounds_of_shenanigans, bool_print_inspected_items=True)
+create_list_of_monkeys(lines, all_monkeys)
+process_all_shenanigans(all_monkeys, rounds_of_shenanigans, bool_print_times_items_inspected=True)
