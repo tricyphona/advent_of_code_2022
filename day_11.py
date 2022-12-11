@@ -38,7 +38,8 @@ test_case = [
 
 class Monkey:
     total_amount_monkeys = 0
-    total_test_value = 1  # combinatie testvalue Monkeys → je kan de combinatie van test values veilig van worry afhalen
+    total_test_value = 1  # combinatie test value Monkeys →
+    # je kan het product van test values veilig van worry afhalen
     # zonder dat dit effect heeft op de test case voor any Monkey.
     part = 1
 
@@ -60,7 +61,7 @@ class Monkey:
         self.new_items = []
         self.inspected_items = 0
         Monkey.total_test_value *= self.test_value
-        self.monkeylist = monkey_list
+        self.monkey_list = monkey_list
 
     def inspect_item(self, item):
         if self.operator_value == 'old':
@@ -80,7 +81,7 @@ class Monkey:
             self.throw_item_to_monkey(self.action_if_test_false, item)
 
     def throw_item_to_monkey(self, monkey_to, item):
-        self.monkeylist[monkey_to].items.append(item)
+        self.monkey_list[monkey_to].items.append(item)
         # print(f"Monkey: {self.id} throws to {monkey} item: {item}")
 
     def __eq__(self, other):
