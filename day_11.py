@@ -37,7 +37,8 @@ rounds_of_shenanigans = 20
 
 class Monkey:
     total_amount_monkeys = 0
-    total_test_value = 1
+    total_test_value = 1  # combinatie testvalue Monkeys → je kan de combinatie van test values veilig van worry afhalen
+    # zonder dat dit effect heeft op de test case voor iedere Monkey.
     part = 1
 
     def __init__(self, id, starting_items, operator, operator_value, test_value,action_if_test_true, action_if_test_false):
@@ -65,9 +66,7 @@ class Monkey:
         if Monkey.part == 1:
             worry_level_bored = worry_level // 3
         elif Monkey.part == 2:
-            if worry_level > Monkey.total_test_value:
-                worry_level = worry_level % Monkey.total_test_value
-            worry_level_bored = worry_level
+            worry_level_bored = worry_level % Monkey.total_test_value
         self.inspected_items += 1
         item = worry_level_bored
         if not worry_level_bored % self.test_value:
