@@ -35,7 +35,6 @@ test_case = [
 
 
 class Monkey:
-    total_amount_monkeys = 0
     total_test_value = 1  # combinatie test value Monkeys →
     # je kan het product van test values veilig van worry afhalen
     # zonder dat dit effect heeft op de test case voor any(Monkey).
@@ -45,7 +44,6 @@ class Monkey:
                  monkey_id, starting_items, operator, operator_value,
                  test_value, action_if_test_true, action_if_test_false,
                  monkey_list):
-        Monkey.total_amount_monkeys += 1
         self.id = monkey_id
         if starting_items is None:
             self.items = []
