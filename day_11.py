@@ -99,7 +99,6 @@ class Monkey:
 
 
 def get_input(lines, all_monkeys):
-    monkey_id, items, operator, operator_value, test_value, to_monkey_true, to_monkey_false = [None for i in range(7)]
     for line in lines:
         if line == '\n':
             continue
@@ -123,11 +122,15 @@ def get_input(lines, all_monkeys):
                 to_monkey_true = int(second_list[-1])
             elif second_list[0] == 'false:':
                 to_monkey_false = int(second_list[-1])
-                all_monkeys.append(
-                    Monkey(
-                        monkey_id, items, operator, operator_value,
-                        test_value, to_monkey_true, to_monkey_false,
-                        all_monkeys))
+                try:
+                    all_monkeys.append(
+                        Monkey(
+                            monkey_id, items, operator, operator_value,
+                            test_value, to_monkey_true, to_monkey_false,
+                            all_monkeys))
+                except UnboundLocalError as e:
+                    print("input heeft niet alle vereiste Monkey values ingevuld")
+                    raise Exception('Input error, incorrect format for Monkeys')
 
 
 def print_items(all_monkeys):
