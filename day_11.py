@@ -1,8 +1,6 @@
 with open("inputs/input_day11_0.txt", 'r') as f:
     lines = f.readlines()
 
-print(lines)
-
 test_case = [
     "Monkey 0:",
     "Starting items: 79, 98",
@@ -152,29 +150,34 @@ def print_number_of_inspected_items(all_monkeys):
     print()
 
 
-def process_all_shenanigans(all_monkeys, rounds_of_shenanigans):
-    print_items(all_monkeys)
+def process_all_shenanigans(all_monkeys, rounds_of_shenanigans,
+                            bool_print_items=False, bool_print_inspected_items=False):
+    if bool_print_items:
+        print_items(all_monkeys)
     monkey_shenanigans(rounds_of_shenanigans, all_monkeys)
-    print_items(all_monkeys)
-    print_number_of_inspected_items(all_monkeys)
+    if bool_print_items:
+        print_items(all_monkeys)
+    if bool_print_inspected_items:
+        print_number_of_inspected_items(all_monkeys)
     active_monkeys = sorted(all_monkeys, reverse=True)
-    print(f"Level of monkey business: "
+    print(f"After {rounds_of_shenanigans} rounds of shenanigans the level of monkey business is: "
           f"{active_monkeys[0].inspected_items} * {active_monkeys[1].inspected_items} = "
           f"{active_monkeys[0].inspected_items * active_monkeys[1].inspected_items}")
 
 
+print(lines)
 # part 1:
 print("Part 1:")
 Monkey.part = 1
 rounds_of_shenanigans = 20
 all_monkeys = []
 get_input(lines, all_monkeys)
-process_all_shenanigans(all_monkeys, rounds_of_shenanigans)
+process_all_shenanigans(all_monkeys, rounds_of_shenanigans, bool_print_inspected_items=True)
 
-print('\n\n')
+print('\n')
 print("Part 2:")
 Monkey.part = 2
 rounds_of_shenanigans = 10000
 all_monkeys = []
 get_input(lines, all_monkeys)
-process_all_shenanigans(all_monkeys, rounds_of_shenanigans)
+process_all_shenanigans(all_monkeys, rounds_of_shenanigans, bool_print_inspected_items=True)
