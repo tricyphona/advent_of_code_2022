@@ -137,15 +137,15 @@ def monkey_shenanigans(rounds_of_shenanigans, all_monkeys):
 
 
 def process_all_shenanigans(all_monkeys, rounds_of_shenanigans,
-                            bool_print_items=False, bool_print_times_items_inspected=False):
-    if bool_print_items:
+                            flag_show_item_list=False, flag_show_items_inspected=False):
+    if flag_show_item_list:
         print_items(all_monkeys)
 
     monkey_shenanigans(rounds_of_shenanigans, all_monkeys)
 
-    if bool_print_items:
+    if flag_show_item_list:
         print_items(all_monkeys)
-    if bool_print_times_items_inspected:
+    if flag_show_items_inspected:
         print_number_of_inspected_items(all_monkeys)
     active_monkeys = sorted(all_monkeys, reverse=True)
     print(f"After {rounds_of_shenanigans} rounds of shenanigans the level of monkey business is: "
@@ -172,7 +172,7 @@ Monkey.part = 1
 rounds_of_shenanigans = 20
 all_monkeys = []
 create_list_of_monkeys(lines, all_monkeys)
-process_all_shenanigans(all_monkeys, rounds_of_shenanigans, bool_print_times_items_inspected=True)
+process_all_shenanigans(all_monkeys, rounds_of_shenanigans, flag_show_items_inspected=True)
 
 print('\n')
 print("Part 2:")
@@ -180,4 +180,4 @@ Monkey.part = 2
 rounds_of_shenanigans = 10000
 all_monkeys = []
 create_list_of_monkeys(lines, all_monkeys)
-process_all_shenanigans(all_monkeys, rounds_of_shenanigans, bool_print_times_items_inspected=True)
+process_all_shenanigans(all_monkeys, rounds_of_shenanigans, flag_show_items_inspected=True)
