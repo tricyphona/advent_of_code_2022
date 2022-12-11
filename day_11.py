@@ -39,7 +39,7 @@ test_case = [
 class Monkey:
     total_amount_monkeys = 0
     total_test_value = 1  # combinatie testvalue Monkeys → je kan de combinatie van test values veilig van worry afhalen
-    # zonder dat dit effect heeft op de test case voor iedere Monkey.
+    # zonder dat dit effect heeft op de test case voor any Monkey.
     part = 1
 
     def __init__(self,
@@ -158,6 +158,7 @@ def process_all_shenanigans(all_monkeys, rounds_of_shenanigans):
 
 
 # part 1:
+print("Part 1:")
 rounds_of_shenanigans = 20
 all_monkeys = []
 get_input(lines, all_monkeys)
