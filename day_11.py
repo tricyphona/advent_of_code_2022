@@ -125,7 +125,10 @@ def get_input(lines, all_monkeys):
             elif second_list[0] == 'false:':
                 to_monkey_false = int(second_list[-1])
                 all_monkeys.append(
-                    Monkey(monkey_id, items, operator, operator_value, test_value, to_monkey_true, to_monkey_false, all_monkeys))
+                    Monkey(
+                        monkey_id, items, operator, operator_value,
+                        test_value, to_monkey_true, to_monkey_false,
+                        all_monkeys))
 
 
 def print_items(all_monkeys):
