@@ -130,24 +130,12 @@ def get_input(lines, all_monkeys):
                         all_monkeys))
 
 
-def print_items(all_monkeys):
-    for i in range(len(all_monkeys)):
-        print(f"Monkey {i}'s items: {all_monkeys[i].items}")
-    print('')
-
-
 def monkey_shenanigans(rounds_of_shenanigans, all_monkeys):
     for i in range(rounds_of_shenanigans):
         for monkey in all_monkeys:
             for j in range(len(monkey.items)):
                 item = monkey.items.pop(0)
                 monkey.inspect_item(item)
-
-
-def print_number_of_inspected_items(all_monkeys):
-    for i in range(len(all_monkeys)):
-        print(f"Monkey {i} has {all_monkeys[i].inspected_items} times inspected an item.")
-    print()
 
 
 def process_all_shenanigans(all_monkeys, rounds_of_shenanigans,
@@ -163,6 +151,18 @@ def process_all_shenanigans(all_monkeys, rounds_of_shenanigans,
     print(f"After {rounds_of_shenanigans} rounds of shenanigans the level of monkey business is: "
           f"{active_monkeys[0].inspected_items} * {active_monkeys[1].inspected_items} = "
           f"{active_monkeys[0].inspected_items * active_monkeys[1].inspected_items}")
+
+
+def print_items(all_monkeys):
+    for i in range(len(all_monkeys)):
+        print(f"Monkey {i}'s items: {all_monkeys[i].items}")
+    print('')
+
+
+def print_number_of_inspected_items(all_monkeys):
+    for i in range(len(all_monkeys)):
+        print(f"Monkey {i} has {all_monkeys[i].inspected_items} times inspected an item.")
+    print()
 
 
 print(lines)
