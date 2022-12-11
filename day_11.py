@@ -44,7 +44,8 @@ class Monkey:
 
     def __init__(self,
                  id, starting_items, operator, operator_value,
-                 test_value, action_if_test_true, action_if_test_false):
+                 test_value, action_if_test_true, action_if_test_false,
+                 monkey_list):
         Monkey.total_amount_monkeys += 1
         self.id = id
         if starting_items is None:
@@ -59,6 +60,7 @@ class Monkey:
         self.new_items = []
         self.inspected_items = 0
         Monkey.total_test_value *= self.test_value
+        self.monkeylist = monkey_list
 
     def inspect_item(self, item):
         if self.operator_value == 'old':
@@ -77,8 +79,8 @@ class Monkey:
         else:
             self.throw_item_to_monkey(self.action_if_test_false, item)
 
-    def throw_item_to_monkey(self, monkey, item):
-        all_monkeys[monkey].items.append(item)
+    def throw_item_to_monkey(self, monkey_to, item):
+        self.monkeylist[monkey_to].items.append(item)
         # print(f"Monkey: {self.id} throws to {monkey} item: {item}")
 
     def __eq__(self, other):
@@ -123,7 +125,7 @@ def get_input(lines, all_monkeys):
             elif second_list[0] == 'false:':
                 to_monkey_false = int(second_list[-1])
                 all_monkeys.append(
-                    Monkey(monkey_id, items, operator, operator_value, test_value, to_monkey_true, to_monkey_false))
+                    Monkey(monkey_id, items, operator, operator_value, test_value, to_monkey_true, to_monkey_false, all_monkeys))
 
 
 def print_items(all_monkeys):
