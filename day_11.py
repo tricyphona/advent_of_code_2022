@@ -159,6 +159,7 @@ def process_all_shenanigans(all_monkeys, rounds_of_shenanigans):
 
 # part 1:
 print("Part 1:")
+Monkey.part = 1
 rounds_of_shenanigans = 20
 all_monkeys = []
 get_input(lines, all_monkeys)
