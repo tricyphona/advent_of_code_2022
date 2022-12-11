@@ -4,36 +4,37 @@ with open("inputs/input_day11_0.txt", 'r') as f:
 print(lines)
 
 test_case = [
-"Monkey 0:",
-"Starting items: 79, 98",
-"Operation: new = old * 19",
-"Test: divisible by 23",
-"If true: throw to monkey 2",
-"If false: throw to monkey 3",
-"\n",
-"Monkey 1:",
-"Starting items: 54, 65, 75, 74",
-"Operation: new = old + 6",
-"Test: divisible by 19",
-"If true: throw to monkey 2",
-"If false: throw to monkey 0",
-"\n",
-"Monkey 2:",
-"Starting items: 79, 60, 97",
-"Operation: new = old * old",
-"Test: divisible by 13",
-"If true: throw to monkey 1",
-"If false: throw to monkey 3",
-"\n",
-"Monkey 3:",
-"Starting items: 74",
-"Operation: new = old + 3",
-"Test: divisible by 17",
-"If true: throw to monkey 0",
-"If false: throw to monkey 1"]
+    "Monkey 0:",
+    "Starting items: 79, 98",
+    "Operation: new = old * 19",
+    "Test: divisible by 23",
+    "If true: throw to monkey 2",
+    "If false: throw to monkey 3",
+    "\n",
+    "Monkey 1:",
+    "Starting items: 54, 65, 75, 74",
+    "Operation: new = old + 6",
+    "Test: divisible by 19",
+    "If true: throw to monkey 2",
+    "If false: throw to monkey 0",
+    "\n",
+    "Monkey 2:",
+    "Starting items: 79, 60, 97",
+    "Operation: new = old * old",
+    "Test: divisible by 13",
+    "If true: throw to monkey 1",
+    "If false: throw to monkey 3",
+    "\n",
+    "Monkey 3:",
+    "Starting items: 74",
+    "Operation: new = old + 3",
+    "Test: divisible by 17",
+    "If true: throw to monkey 0",
+    "If false: throw to monkey 1"
+]
 
 # lines = test_case
-rounds_of_shenanigans = 20
+
 
 class Monkey:
     total_amount_monkeys = 0
@@ -41,7 +42,9 @@ class Monkey:
     # zonder dat dit effect heeft op de test case voor iedere Monkey.
     part = 1
 
-    def __init__(self, id, starting_items, operator, operator_value, test_value,action_if_test_true, action_if_test_false):
+    def __init__(self,
+                 id, starting_items, operator, operator_value,
+                 test_value, action_if_test_true, action_if_test_false):
         Monkey.total_amount_monkeys += 1
         self.id = id
         if starting_items is None:
@@ -63,10 +66,10 @@ class Monkey:
         else:
             worry_level = eval(f"{item} {self.operator} {self.operator_value}")
 
-        if Monkey.part == 1:
-            worry_level_bored = worry_level // 3
-        elif Monkey.part == 2:
+        if Monkey.part == 2:
             worry_level_bored = worry_level % Monkey.total_test_value
+        else:
+            worry_level_bored = worry_level // 3
         self.inspected_items += 1
         item = worry_level_bored
         if not worry_level_bored % self.test_value:
@@ -76,7 +79,7 @@ class Monkey:
 
     def throw_item_to_monkey(self, monkey, item):
         all_monkeys[monkey].items.append(item)
-        #print(f"Monkey: {self.id} throws to {monkey} item: {item}")
+        # print(f"Monkey: {self.id} throws to {monkey} item: {item}")
 
     def __eq__(self, other):
         return self.inspected_items == other.inspected_items
@@ -94,8 +97,8 @@ class Monkey:
         return self.inspected_items <= other.inspected_items
 
 
-
 def get_input(lines, all_monkeys):
+    monkey_id, items, operator, operator_value, test_value, to_monkey_true, to_monkey_false = [None for i in range(7)]
     for line in lines:
         if line == '\n':
             continue
@@ -136,36 +139,34 @@ def monkey_shenanigans(rounds_of_shenanigans, all_monkeys):
                 item = monkey.items.pop(0)
                 monkey.inspect_item(item)
 
+
 def print_number_of_inspected_items(all_monkeys):
     for i in range(len(all_monkeys)):
         print(f"Monkey {i} has {all_monkeys[i].inspected_items} times inspected an item.")
     print()
 
+
+def process_all_shenanigans(all_monkeys, rounds_of_shenanigans):
+    print_items(all_monkeys)
+    monkey_shenanigans(rounds_of_shenanigans, all_monkeys)
+    print_items(all_monkeys)
+    print_number_of_inspected_items(all_monkeys)
+    active_monkeys = sorted(all_monkeys, reverse=True)
+    print(f"Level of monkey business: "
+          f"{active_monkeys[0].inspected_items} * {active_monkeys[1].inspected_items} = "
+          f"{active_monkeys[0].inspected_items * active_monkeys[1].inspected_items}")
+
+
+# part 1:
+rounds_of_shenanigans = 20
 all_monkeys = []
 get_input(lines, all_monkeys)
-#part 1:
-
-print_items(all_monkeys)
-monkey_shenanigans(rounds_of_shenanigans, all_monkeys)
-print_items(all_monkeys)
-print_number_of_inspected_items(all_monkeys)
-active_monkeys = sorted(all_monkeys, reverse=True)
-print(f"Level of monkey business: "
-      f"{active_monkeys[0].inspected_items} * {active_monkeys[1].inspected_items} = "
-      f"{active_monkeys[0].inspected_items * active_monkeys[1].inspected_items}")
+process_all_shenanigans(all_monkeys, rounds_of_shenanigans)
 
 print('\n\n')
 print("Part 2:")
-all_monkeys = []
-get_input(lines, all_monkeys)
 Monkey.part = 2
 rounds_of_shenanigans = 10000
-
-print_items(all_monkeys)
-monkey_shenanigans(rounds_of_shenanigans, all_monkeys)
-print_items(all_monkeys)
-print_number_of_inspected_items(all_monkeys)
-active_monkeys = sorted(all_monkeys, reverse=True)
-print(f"Level of monkey business: "
-      f"{active_monkeys[0].inspected_items} * {active_monkeys[1].inspected_items} = "
-      f"{active_monkeys[0].inspected_items * active_monkeys[1].inspected_items}")
+all_monkeys = []
+get_input(lines, all_monkeys)
+process_all_shenanigans(all_monkeys, rounds_of_shenanigans)
