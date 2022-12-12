@@ -69,6 +69,7 @@ class Monkey:
             worry_level_bored = worry_level % Monkey.total_test_value
         else:
             worry_level_bored = worry_level // 3
+
         self.inspected_items += 1
         item = worry_level_bored
         if not worry_level_bored % self.test_value:
