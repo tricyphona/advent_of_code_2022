@@ -100,7 +100,8 @@ for i, line in enumerate(lines):
         if char == "E":
             char = 'z'
             eindpunt_x, eindpunt_y = j, i
-        startpunten.append((startpunt_x,startpunt_y))
+        if char == 'a':
+            startpunten.append((startpunt_x, startpunt_y))
         line_heightmap_number.append(Point(j, i, height=ord(char)-96))
     heightmap_numbers.append(line_heightmap_number)
 
