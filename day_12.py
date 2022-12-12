@@ -28,19 +28,19 @@ class Point:
     def available_paths(self):
         up, down, right, left = [False for i in range(4)]
         if self.y > 0 \
-                and self.lower_weight(self.x, self.y - 1) \
+                and self.self_lower_weight(self.x, self.y - 1) \
                 and self.check_walkable_height_difference(self.x, self.y - 1):
             up = True
         if self.y < Point.corner_y \
-                and self.lower_weight(self.x, self.y + 1) \
+                and self.self_lower_weight(self.x, self.y + 1) \
                 and self.check_walkable_height_difference(self.x, self.y + 1):
             down = True
         if self.x < Point.corner_x \
-                and self.lower_weight(self.x + 1, self.y) \
+                and self.self_lower_weight(self.x + 1, self.y) \
                 and self.check_walkable_height_difference(self.x + 1, self.y):
             right = True
         if self.x > 0 \
-                and self.lower_weight(self.x - 1, self.y) \
+                and self.self_lower_weight(self.x - 1, self.y) \
                 and self.check_walkable_height_difference(self.x - 1, self.y):
             left = True
         return up, down, right, left
@@ -48,10 +48,9 @@ class Point:
     def check_walkable_height_difference(self, x, y):
         return heightmap[y][x].height - self.height <= 1
 
-    def lower_weight(self, x, y):
+    def self_lower_weight(self, x, y):
         # print(f"weight: {self.weight}, other: {heightmap[y][x].weight}, coords: {x}, {y}")
         return self.weight < heightmap[y][x].weight
-
 
     def overwrite_weight(self, other):
         other.weight = self.weight + 1
@@ -77,7 +76,7 @@ class Point:
         return f"{self.weight}"
 
 
-# werkt niet ivm memory. Vervangen met een while loop.
+# Werkt niet ivm memory. Vervangen met een while loop.
 def walk_the_walk(startpunt):
     available_paths = startpunt.available_paths()
     walkable_neighbours = startpunt.get_walkable_neighbours(available_paths)
