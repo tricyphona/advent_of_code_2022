@@ -77,6 +77,7 @@ class Point:
         return f"{self.weight}"
 
 
+# werkt niet ivm memory. Vervangen met een while loop.
 def walk_the_walk(startpunt):
     available_paths = startpunt.available_paths()
     walkable_neighbours = startpunt.get_walkable_neighbours(available_paths)
