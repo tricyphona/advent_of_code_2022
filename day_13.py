@@ -137,6 +137,5 @@ print(part2_list)
 part2_list.sort(key=functools.cmp_to_key(compare_signal))
 print(part2_list)
 
-print(part2_list.index([[2]]) + 1)
-print(part2_list.index([[6]]) + 1)
-print((part2_list.index([[2]]) + 1) * (part2_list.index([[6]]) + 1))
+print(f"positie begin: {part2_list.index([[2]]) + 1}, positie eind: {part2_list.index([[6]]) + 1} \n"
+      f"uitkomst: {(part2_list.index([[2]]) + 1) * (part2_list.index([[6]]) + 1)}")
