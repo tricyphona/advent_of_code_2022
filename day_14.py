@@ -9,8 +9,8 @@ test_lines = [
 # lines = test_lines
 # print(lines)
 cave = []
-max_x, max_y = 0,0
-min_x, min_y = 10000,0
+max_x, max_y = 0, 0
+min_x, min_y = 10000, 0
 for line in lines:
     points = line.split()[0::2]
     rocks = []
@@ -30,14 +30,15 @@ for line in lines:
 # print(cave)
 print(max_x, max_y)
 print(min_x, min_y)
-min_x -= 200
-max_x += 200
 min_y = 0
 max_y += 2
+min_x -= max_y
+max_x += max_y
 numpy_cave = np.zeros((max_y+1-min_y, max_x+1-min_x))
 numpy_cave[max_y][:] = 1
 print(numpy_cave)
 print(numpy_cave.shape)
+
 
 def create_rocks(cave, numpy_cave):
     for line in cave:
@@ -76,6 +77,7 @@ def create_rocks(cave, numpy_cave):
                     numpy_cave[y][x] = 1
                     print(x, y)
 
+
 create_rocks(cave, numpy_cave)
 print(numpy_cave)
 print(numpy_cave.shape)
@@ -105,6 +107,7 @@ class Sand:
             else:
                 return False
 
+
 first_sand = Sand(min_x)
 while first_sand.fall_down():
     pass
@@ -127,3 +130,35 @@ while True:
         break
 
 print(numpy_cave)
+
+
+from PIL import Image, ImageDraw
+
+
+def putPixel(x: int, y: int, color, img):
+    draw = ImageDraw.Draw(img)
+    draw.point((x,y), fill=color)
+
+screen_width = max_x//2
+screen_height = max_y
+img = Image.new('RGB',(2*screen_width,2*screen_height),'black')
+draw = ImageDraw.Draw(img)
+
+y,x = numpy_cave.shape
+print(x, y)
+for numpy_x in range(x):
+    pixel_x = 2 * numpy_x
+    for numpy_y in range(y):
+        pixel_y = 2 * numpy_y
+        if numpy_cave[numpy_y][numpy_x] == 1:
+            putPixel(pixel_x,pixel_y,'yellow', img)
+            putPixel(pixel_x+1, pixel_y, 'yellow', img)
+            putPixel(pixel_x, pixel_y+1, 'yellow', img)
+            putPixel(pixel_x+1, pixel_y+1, 'yellow', img)
+        if numpy_cave[numpy_y][numpy_x] == 2:
+            putPixel(pixel_x,pixel_y,'red', img)
+            putPixel(pixel_x+1, pixel_y, 'red', img)
+            putPixel(pixel_x, pixel_y+1, 'red', img)
+            putPixel(pixel_x+1, pixel_y+1, 'red', img)
+
+img.save('PIL-black.png')
