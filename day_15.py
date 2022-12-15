@@ -153,11 +153,14 @@ min_y, max_y = 0, 4000000
 def remove_obsolete_ranges(scanned_ranges):
     ranges = [scanned_ranges[0]]
     for scanned_range in scanned_ranges:
+        append_scanned_range = True
         for range_scan in ranges:
             if range_scan.overlap_ranges(scanned_range.x_min, scanned_range.x_max):
-                pass
+                append_scanned_range = False
             else:
-                ranges.append(scanned_range)
+                pass
+        if append_scanned_range:
+            ranges.append(scanned_range)
     return ranges
 
 
@@ -176,6 +179,12 @@ def find_sensors(sensors, row):
             sensor_max_x = sensor.x + range_x
             range_x_sensor.append([sensor_min_x, sensor_max_x])
     return range_x_sensor
+def get_lowest_x_max(ranges):
+    x_max = ranges[0].x_max
+    for x_range_sensor in ranges:
+        if x_max > x_range_sensor.x_max:
+            x_max = x_range_sensor.x_max
+    return x_max
 
 def scan_x_range(range_x_sensor, scanned_ranges, row):
     for range_sensor in range_x_sensor:
@@ -190,9 +199,14 @@ def scan_x_range(range_x_sensor, scanned_ranges, row):
     if len(scanned_range_set) > 1:
         print(row)
         print(scanned_range_set)
+        x_max = get_lowest_x_max(scanned_range_set)
+        missing_number = x_max-1
+        print(missing_number)
+        print(row*max_row)
+        print(row+max_row*missing_number)
 
 
 for row in range(0, max_row):
-    range_x_sensor = find_sensors(sensors, row)
-    scanned_ranges = [Range_scanned(range_x_sensor[0][0], range_x_sensor[0][1])]
-    scan_x_range(range_x_sensor, scanned_ranges, row)
+    x_range_sensor = find_sensors(sensors, row)
+    initial_scan_range = [Range_scanned(x_range_sensor[0][0], x_range_sensor[0][1])]
+    scan_x_range(x_range_sensor, initial_scan_range, row)
