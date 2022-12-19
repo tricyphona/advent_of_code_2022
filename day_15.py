@@ -1,6 +1,8 @@
-import numpy as np
+import time
 with open("inputs/input_day15_0.txt", 'r') as f:
     lines = f.readlines()
+
+st = time.time()
 
 test_input = [
     "Sensor at x=2, y=18: closest beacon is at x=-2, y=15",
@@ -204,6 +206,8 @@ def scan_x_range(range_x_sensor, scanned_ranges, row):
         print(missing_number)
         print(row*max_row)
         print(row+max_row*missing_number)
+        et = time.time()
+        print(f"elapsed time: {et - st} seconden")
 
 
 for row in range(0, max_row):
