@@ -2,12 +2,12 @@ import numpy as np
 with open("inputs/input_day17_0.txt", 'r') as f:
     lines = f.read().strip()
 # lines = open('inputs/input_day17_0.txt', 'r').read().strip()
-vertical_size = 5000
-tetris_board = np.zeros((vertical_size, 7), dtype=np.int8)
-print(lines)
-print(len(lines))
-test_input = ">>><<><>><<<>><>>><<<>>><<<><<<>><>><<>>"
+test_input = ">>><<><>><<<>><>>><<<>>><<<><<<>><>><<>>".strip()
 # lines = test_input
+vertical_size = 500000
+tetris_board = np.zeros((vertical_size, 7), dtype=np.int8)
+print(vertical_size)
+
 
 for row in tetris_board:
     if all (row > 0):
@@ -86,7 +86,6 @@ def spawn_object(shape, y=vertical_size-1):
 print()
 # draw_object("h_line", 0, 0)
 
-
 top_line = 0
 
 shapes = ["h_line", "cross", "corner", "v_line", "box"]
@@ -97,12 +96,15 @@ if y == 0 and not test_if_object_is_free("v_line",y,0):
 i=0
 k = 0
 y, x = spawn_object(shapes[k])
-print(shapes[k])
 j = 0
 tetris_board[vertical_size-1, :] = 1
 objecten = 1
 min_y = vertical_size
-while objecten < 2023:
+# tall_tower_rest part 2
+objects_spawned = 1
+oldies = []
+while objecten < 320+1760+1 :
+    # print(f"{objecten} / 50000")
     i = i % len(lines)
     wind = lines[i]
     i += 1
@@ -113,14 +115,26 @@ while objecten < 2023:
         y_old = y
         if y < min_y:
             min_y = y
+        oldies.append(y_old)
         old_shape = shapes[k]
         k += 1
         k = k % len(shapes)
-        y,x = spawn_object(shapes[k], min_y)
-        # if k == 3:
-        #     draw_object(shapes[k], y, x)
+        y, x = spawn_object(shapes[k], min_y)
         objecten += 1
+        objects_spawned += 1
+        if i == 1:
+            # print(shapes[k])
+            print(y_old)
+            # print(len(lines))
+            print(objects_spawned)
+            objects_spawned2 = objects_spawned
+            objects_spawned = 0
 
-
-print(tetris_board[vertical_size-50:vertical_size,:])
+difference_list = []
+print(tetris_board[y_old-50:y_old+10, :])
 print(vertical_size-y_old-1)
+
+# y_old vast verschil zoals hierboven geprint. Aantal objecten gespanwed.
+# Hoogte erbij per aantal objecten, ((1000000000000 // aantal objecten) - 1) * 2737 --> extra hoogte per aantal objecten.
+# Start & eind uitrekenen, omdat het vaste reeksen zijn, alles er tussenin weglaten, alleen eerste reeks & laatste stukje.
+# 320 + 1760 objecten: hoogte berekenen en optellen bij voorgaand getal.
