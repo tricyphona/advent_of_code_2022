@@ -123,8 +123,8 @@ sum_right_indices = 0
 for i, pair in enumerate(pairs):
     if Signal.compare_lists(pair[0], pair[1]):
         sum_right_indices += i+1
+        print(i, sum_right_indices)
 print(sum_right_indices)
-
 # Part 2
 part2_list = []
 for pair in pairs:
@@ -139,3 +139,4 @@ print(part2_list)
 
 print(f"positie begin: {part2_list.index([[2]]) + 1}, positie eind: {part2_list.index([[6]]) + 1} \n"
       f"uitkomst: {(part2_list.index([[2]]) + 1) * (part2_list.index([[6]]) + 1)}")
+
